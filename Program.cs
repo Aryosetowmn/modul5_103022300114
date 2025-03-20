@@ -1,4 +1,29 @@
-﻿class PemrosesData
+using System.Collections.Generic;
+class SimpleDataBase<T>
+{
+    private List<T> storedData;
+    private List<DateTime> inputDates = new List<DateTime>();
+
+    public SimpleDataBase()
+    {
+        storedData = new List<T>();
+    }
+    public void addNewData(T data)
+    {
+        storedData.Add(data);
+        inputDates.Add(DateTime.Now);
+    }
+
+    public void printAllData()
+    {
+        for (int i = 0; i < storedData.Count; i++)
+        {
+            Console.WriteLine("Data " + (i + 1) + " berisi: " + storedData[i] + ", yang disimpan pada waktu UTC: " + inputDates[i]);
+        }
+    }
+}
+
+class PemrosesData
 {
     public void DapatkanNilaiTerbesar<T>(T nilai1, T nilai2, T nilai3)
     {
@@ -27,12 +52,21 @@
     }
 }
 
-class Utama
+class Program
 {
     public static void Main(string[] args)
     {
-        //103022300114
+         //103022300114
         PemrosesData pm = new PemrosesData();
         pm.DapatkanNilaiTerbesar<double>(10, 30, 22);
+      
+        SimpleDataBase<int> simple = new SimpleDataBase<int>();
+        simple.addNewData(10);
+        simple.addNewData(30);
+        simple.addNewData(22);
+        simple.printAllData();
     }
+}
+      
+
 }
